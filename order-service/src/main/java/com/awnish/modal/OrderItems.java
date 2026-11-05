@@ -3,8 +3,8 @@ package com.awnish.modal;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
-import javax.sound.midi.Sequence;
 
 @Data
 @Entity
@@ -18,29 +18,10 @@ public class OrderItems {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     @JsonIgnore
+    @ToString.Exclude
     private Orders order;
     private Integer product_id;
     private Integer quantity;
     private Double price;
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public void setOrder(Orders order) {
-        this.order = order;
-    }
-
-    public void setProduct_id(Integer product_id) {
-        this.product_id = product_id;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
 
 }

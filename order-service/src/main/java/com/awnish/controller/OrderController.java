@@ -1,6 +1,5 @@
 package com.awnish.controller;
 
-import com.awnish.kafka.OrderProducer;
 import com.awnish.modal.Orders;
 import com.awnish.service.OrderService;
 import org.springframework.http.HttpStatus;
@@ -15,18 +14,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderController {
 
     private final OrderService orderService;
-    private final OrderProducer orderProducer;
 
-    public OrderController(OrderService orderService,OrderProducer orderProducer){
+
+    public OrderController(OrderService orderService){
         this.orderService=orderService;
-        this.orderProducer=orderProducer;
     }
 
     @PostMapping("/saveOrder")
     public ResponseEntity<String> saveOrder(@RequestBody Orders order) throws Exception {
         try{
             orderService.saveOrder(order);
-            orderProducer.submitOrderEvent(order);
 
         }catch (Exception exception){
             throw new Exception(exception);
