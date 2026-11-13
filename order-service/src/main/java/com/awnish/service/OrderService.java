@@ -28,8 +28,8 @@ public class OrderService {
             item.setOrder(order);
         }
         Orders or = orderRepository.save(order);
-       int eventIdd= eventId.addAndGet(1);
-        OrderCreatedEvent orderCreatedEvent=new OrderCreatedEvent(eventIdd,"OrderCreated",1, LocalDateTime.now(),or.getId(),or.getUser_id(),or.getStatus(),or.getItems());
+        int eventIdd = eventId.addAndGet(1);
+        OrderCreatedEvent orderCreatedEvent = new OrderCreatedEvent(eventIdd, "OrderCreated", 1, LocalDateTime.now(), or.getId(), or.getUser_id(), or.getStatus(), or.getItems());
         orderProducer.submitOrderEvent(orderCreatedEvent);
     }
 
